@@ -1,0 +1,23 @@
+SQL:
+1a
+
+SELECT value FROM salary WHERE employee_id = '5' AND date > '2020-12-31 23:59:59' AND date < '2021-12-31 23:59:59' ORDER BY value DESC LIMIT 1, 1;
+
+SELECT value FROM (SELECT value FROM salary WHERE employee_id = '5' AND date > '2020-12-31 23:59:59' AND date < '2021-12-31 23:59:59' ORDER BY value DESC LIMIT 2) AS emp ORDER BY value LIMIT 1;
+
+
+
+
+1b
+SELECT *
+FROM advertisements adv
+
+
+JOIN advert_params ap_color ON ap_color.advert_id = adv.id AND ap_color.value = 'чёрный'
+JOIN advert_params ap_plan ON ap_plan.advert_id = adv.id AND ap_plan.value = 'да'
+JOIN advert_params ap_cost ON ap_cost.advert_id = adv.id AND (ap_cost.value > 5000 AND ap_cost.value < 15000)
+
+
+JOIN params p_color ON p_color.id = ap_color.param_id AND p_color.key = 'color'
+JOIN params p_plan ON p_plan.id = ap_plan.param_id AND p_plan.key = 'installment_plan'
+JOIN params p_cost ON p_cost.id = ap_cost.param_id AND p_cost.key = 'cost'
